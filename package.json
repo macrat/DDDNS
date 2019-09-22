@@ -1,0 +1,24 @@
+{
+  "name": "dddns-console",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nuxt dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macrat/dddns-console.git"
+  },
+  "author": "MacRat <m@crat.jp> (https://blanktar.jp)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/macrat/dddns-console/issues"
+  },
+  "homepage": "https://github.com/macrat/dddns-console#readme",
+  "dependencies": {
+    "@nuxtjs/vuetify": "^1.8.5",
+    "nuxt": "^2.9.2"
+  }
+}
