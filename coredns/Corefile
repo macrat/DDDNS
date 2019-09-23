@@ -1,0 +1,11 @@
+. {
+    etcd . {
+        endpoint http://etcd:2379
+    }
+
+    prometheus 0.0.0.0:9153
+    cache 600
+
+    errors
+    log
+}

@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  coredns:
+    image: coredns/coredns:latest
+
+    volumes:
+      - ./coredns:/conf:ro
+
+    ports:
+      - 1053:53/udp
+      - 9153:9153/tcp
+
+    depends_on:
+      - etcd
+
+    command: ["-conf", "/conf/Corefile"]
+
+  etcd:
+    image: quay.io/coreos/etcd:v3.4.1
+
+    command: ["etcd", "--listen-client-urls", "http://0.0.0.0:2379", "--advertise-client-urls", "http://localhost:2379"]
+
+  prometheus:
+    image: prom/prometheus:latest
+
+    volumes:
+      - ./prometheus:/etc/prometheus:ro
+
+    ports:
+      - 9090:9090
