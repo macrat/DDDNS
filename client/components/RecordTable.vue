@@ -40,11 +40,10 @@ import RecordTableRow from '~/components/RecordTableRow';
 
 
 export default {
-    props: ['value'],
+    props: ['value', 'saving'],
     components: {RecordTableRow},
     data: () => ({
         edited: false,
-        saving: false,  // for debuging
     }),
     watch: {
         value: {
@@ -52,6 +51,11 @@ export default {
                 this.edited = true;
             },
             deep: true,
+        },
+        saving(val, old) {
+            if (val === false && old === true) {
+                this.edited = false;
+            }
         },
     },
     methods: {
@@ -73,13 +77,6 @@ export default {
         },
         save() {
             this.$emit('save');
-
-            /** for debuging **/
-            this.saving = true;
-            setTimeout(() => {
-                this.saving = false; 
-                this.edited = false;
-            }, 500);
         },
     },
 }

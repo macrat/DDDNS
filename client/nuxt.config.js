@@ -9,7 +9,11 @@ export default {
         ],
     },
 
-    modules: ['@nuxtjs/vuetify'],
+    modules: [
+        '@nuxtjs/vuetify',
+    ],
+
+    serverMiddleware: ['~~/api/'],
 
     vuetify: {
         theme: {

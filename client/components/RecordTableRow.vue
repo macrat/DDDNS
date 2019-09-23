@@ -9,6 +9,9 @@
 </template>
 
 <script>
+import {guessValueType} from '../common/utils';
+
+
 export default {
     props: ['value'],
     data: () => ({
@@ -31,27 +34,7 @@ export default {
     }),
     computed: {
         type() {
-            const value = this.value.value.trim();
-
-            if (value === '' || this.value.domain.trim() === '') {
-                return 'INVALID';
-            }
-
-            const suffix = (1 <= this.value.port && this.value.port <= 65535) ? ' + SRV' : '';
-
-            if (value.match(/^(?:25[0-5]?|2[0-4][0-9]?|1[0-9]{2}|[1-9][0-9]?|0)(?:.(?:25[0-5]?|2[0-4][0-9]?|1[0-9]{2}|[1-9][0-9]?|0)){3}$/)) {
-                return 'A' + suffix;
-            }
-
-            if (value.match(/^(::|(?:[0-9a-fA-F]{1,4}:){1,7}:|:(?::[0-9a-fA-F]{1,4}){1,7}|(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4})$/)) {
-                return 'AAAA' + suffix;
-            }
-
-            if (value.match(/^([a-zA-Z0-9]+\.)+[a-zA-Z]{2,}\.?$/)) {
-                return 'CNAME' + suffix;
-            }
-
-            return 'TXT';
+            return guessValueType(this.value);
         },
     },
     methods: {
